@@ -1,6 +1,13 @@
+
 .git
 .gitignore
 **/target
 .idea
 .vscode
 *.log
+.env
+.env.*
+azure_key
+id_rsa
+id_rsa.pub
+nuclearquest.tar

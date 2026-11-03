@@ -4,6 +4,7 @@
 *.log
 .env
 .env.*
+!.env.example
 azure_key
 id_rsa
 id_rsa.pub
