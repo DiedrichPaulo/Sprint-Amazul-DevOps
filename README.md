@@ -26,6 +26,8 @@ O acesso externo é realizado pelo IP público da VM, utilizando a porta 8080.
 
 O banco de dados H2 está integrado à aplicação e utiliza armazenamento em memória.
 
+![Arquitetura da solução](docs/arquitetura.png)
+
 Executando com Docker
 
 Construir a imagem
@@ -93,6 +95,7 @@ azure/script.sh
 Para executar em uma assinatura Azure com o Azure CLI configurado:
 
 chmod +x azure/script.sh
+
 ./azure/script.sh
 
 Execução na VM Azure
