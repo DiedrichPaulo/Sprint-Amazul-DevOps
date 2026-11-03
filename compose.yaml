@@ -1,0 +1,44 @@
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nuclearquest-api
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/nuclearquest
+      DB_USER: nuclearquest
+      DB_PASSWORD: nuclearquest123
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - nuclearquest-network
+    restart: unless-stopped
+
+  db:
+    image: postgres:17-alpine
+    container_name: nuclearquest-db
+    environment:
+      POSTGRES_DB: nuclearquest
+      POSTGRES_USER: nuclearquest
+      POSTGRES_PASSWORD: nuclearquest123
+    volumes:
+      - nuclearquest-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nuclearquest -d nuclearquest"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - nuclearquest-network
+    restart: unless-stopped
+
+networks:
+  nuclearquest-network:
+    driver: bridge
+
+volumes:
+  nuclearquest-data:
